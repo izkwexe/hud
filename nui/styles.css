@@ -1,0 +1,604 @@
+@import url('https://fonts.googleapis.com/css2?family=Radio+Canada:wght@300;400;500;600;700&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Radio Canada', sans-serif;
+  color: white;
+}
+
+body {
+  height: 100vh;
+  z-index: 10;
+/*   background-color: black !important; */
+}
+
+.background-container {
+  background-image: url('public/images/bg.sgv');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh; /* Altura total da viewport */
+}
+
+.bg-test{
+  height: 100%;
+  position: sticky;
+  z-index: 0;
+}
+
+.logo-main-header-box {
+  position: absolute;
+  top: -4em;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: .9;
+}
+
+.logo-main-header-box>img {
+  min-width: 180px;
+  min-height: 10px;
+  width: 14vw;
+  height: 12vw;
+  background-size: cover;
+}
+
+.hud-velocity {
+  position: absolute;
+  bottom: 13px;
+  right: 2em;
+  zoom: 1.07;
+}
+
+.main-box {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 88px;
+  width: 220px;
+}
+
+.main-box,
+.main-footer {
+  transform: scale(1.2);
+}
+
+.box-gasol {
+  height: 34px;
+  width: 100px;
+  overflow: hidden;
+  position: absolute;
+  top: 3.5px;
+  left: 11px;
+  transform-origin: 100% 100%;
+  transition: .3s;
+}
+
+.gasolina{
+  border-left: 1.9px solid #FFAA5B;
+  border-top: 1.8px solid #FFAA5B;
+  transform: skew(-43deg, 0);
+  height: 85%;
+  width: 100%;
+  background-size: cover;
+  position: sticky;
+  overflow: hidden;
+  transition: 0.1s ease-in-out;
+  transform-origin: 0% 100%;
+}
+
+img[src="./public/images/gasolineIcon.svg"] {
+  position: absolute;
+  top: 35px;
+  left: 7px;
+  z-index: 1;
+  transform: scale(1.75);
+}
+
+img[src="./public/images/turboIcon.svg"] {
+  position: absolute;
+  top: 35px;
+  left: 16px;
+  z-index: 1;
+  transform: scale(1.55);
+}
+
+.box-turbo {
+  height: 34px;
+  width: 100px;
+  overflow: hidden;
+  position: absolute;
+  top: 5px;
+  left: 20.5px;
+  transform-origin: 100% 100%;
+  transition: .3s;
+}
+
+.turbo {
+  border-bottom: 1.8px solid #4B88FF;
+  height: 97.5%;
+  width: 100%;
+  background-size: cover;
+  position: sticky;
+  overflow: hidden;
+  transition: 0.1s ease-in-out;
+  transform-origin: 0% 100%;
+}
+
+.main-box .icon-line {
+  position: absolute;
+  bottom: 6px;
+  left: 4px;
+}
+
+.main-box .icons {
+  position: absolute;
+  top: 13px;
+  left: 44px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-box .icons div {
+  height: 19px;
+  width: 19px;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.28);
+  margin: 0 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.motorContainer {
+  position: absolute;
+  right: -28px;
+  width: 19px;
+  height: 19px;
+  overflow: hidden;
+}
+.motorProgress {
+  position: absolute;
+  bottom: 0;
+  width: 19px;
+}
+
+.main-box .icons div img {
+  height: 9px;
+  width: 9px;
+}
+
+.velocity {
+  color: white;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.velocity h2 {
+  display: flex;
+  align-items: center;
+}
+
+.velocity span {
+  color: rgba(178, 178, 178, 0.549);
+}
+
+.velocity .km-text {
+  color: white;
+  font-size: 10px;
+  margin-left: 5px; 
+}
+
+.level {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 2px solid #6e6d6e;
+  background: rgba(0, 0, 0, 0.71);
+  border: 1px solid rgba(58, 58, 58, 0.38);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -8px;
+  right: -6px;
+  font-size: 12px;
+}
+
+.main-footer {
+  width: 220px;
+  height: 38.92px;
+  display: flex;
+  bottom: 0;
+  left: -219.75px;
+  position: absolute;
+}
+
+
+.main-footer .tringle-main {
+  position: relative;
+  overflow: visible;
+  height: 36px;
+  width: 40px;
+}
+
+.triangle-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  width: 153.6px;
+  height: 38.4px;
+}
+.tringle-main {
+  position: absolute;
+  bottom: 0vw;
+}
+.tringle-main:nth-child(1) {
+  left: 46px;
+}
+.tringle-main:nth-child(2) {
+  left: 43px;
+}
+.tringle-main:nth-child(3) {
+  left: -18px;
+}
+.tringle-main:nth-child(4) {
+  left: -27px;
+}
+
+
+.main-footer div .icon-polygon {
+  height: 20px;
+  width: 20px;
+  background-size: cover;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 2px;
+}
+
+.main-footer :nth-child(1) .icon-polygon, .main-footer :nth-child(3) .icon-polygon {
+  left: 50%;
+  transform: translateX(-50%);
+  top: 7px;
+}
+#shieldIcon, #thirst {
+  position: absolute;
+  top: 13px;
+}
+
+.main-footer .retangle {
+  background-size: cover;
+  height: 34px;
+  width: 102px;
+  position: absolute;
+  right: 0;
+  bottom: 4px;
+  display: flex;
+}
+
+.main-footer .retangle>img {
+  padding-left: 20px;
+  margin-top: 6px;
+}
+
+.main-footer .retangle .box-radio {
+  font-size: 5px;
+  position: static;
+  height: 100%;
+  width: auto;
+  transform: translateX(0%);
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  margin-left: 5px;
+}
+
+.main-footer .frequence {
+  position: static;
+  height: auto;
+  width: auto;
+  transform: translateX(0%);
+  font-size: 12px;
+}
+.frequence span{
+  color:#7c7a7c;
+  margin-left: 2px;
+}
+.ldBar path.mainline {
+  stroke-width: 2;
+  stroke: #E03737;
+}
+.ldBar path.baseline {
+  stroke-width: 0;
+  stroke: #f1f2f3;
+  stroke-linecap: round;
+  filter:url(#custom-shadow);
+}
+.ldBar-label {
+  display: none;
+}
+.armor path.mainline {
+  transition: 3s;
+  stroke: #05FF00;
+}
+//.hunger path.mainline {
+//  stroke: #E09237;
+//}
+//.thirst path.mainline {
+//  stroke: #378FE0;
+//}
+.health,
+.armor{
+  position: absolute;
+  left: -2.88px;
+  top: -3.84px;
+}
+.armor,
+.thirst {
+  transform: rotate(180deg);
+}
+//.hunger {
+//  left: -4px;
+//}
+
+.gunContainer {
+  position: absolute;
+  left: 327px;
+  bottom: 45px;
+  width: 110px;
+  height: 80px;
+}
+
+.gun {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 50%;
+}
+
+.ammo {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ammo h1 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 18px;
+  text-align: center;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+.ammo h1 span {
+  font-weight: 300;
+}
+
+.clock {
+  z-index: 10;
+  box-sizing: border-box;
+  padding: 0 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: absolute;
+  top: 38px;
+  right: .75em !important;
+  width: 180px;
+  height: 42px;
+  border-radius: 3px;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 1%);
+  background: linear-gradient(270deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.065) 100%, rgba(0, 0, 0, 0) 90%);
+}
+
+.clock h1 {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.day-clock-icon {
+  margin-left: 5px;
+}
+
+.bg-clock-image {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.local-text {
+  background: linear-gradient(270deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.075) 94.18%);
+  position: absolute;
+  top: 85px;
+  right: .75em !important;
+  width: 181px;
+  height: 19px;
+  clip-path: polygon(0 0, 100% 0%, 100% 100%, 14% 100%);
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.local-text>span {
+  font-size: 8px;
+  line-height: 10px;
+  letter-spacing: .6px;
+  text-align: center;
+  transform: translateX(7px);
+  opacity: .8;
+}
+
+.weapon-box {
+  position: absolute;
+  left: 381px;
+  bottom: 53px;
+  height: 78px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.weapon-box>img {
+  max-height: 30px;
+  max-width: 83px;
+  background-size: cover;
+}
+
+.amunnation-box {
+  margin-top: 10px;
+  background: rgba(0 , 0, 0, .46);
+  border-radius: 5px;
+  text-align: center;
+  letter-spacing: 2px;
+  text-align: center;
+  font-size: 15px;
+  line-height: 18px;
+  /* margin-right: 3px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 110px;
+  height: 42px;
+}
+
+
+
+
+.hotbarContainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100vw;
+  height: 10vw;
+  position: absolute;
+  bottom: 0;
+  left: 0;/* 
+  background: red; */
+}
+
+.hotbar {
+  box-sizing: border-box;
+  padding: 0 0.75vw;
+  padding-top: 0.5vw;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  width: 31vw;
+  height: 7.75vw;/* 
+  background-color: rgba(0, 0, 255, 0.274); */
+}
+
+.hotbar h1:nth-child(8) {
+  position: absolute;
+  left: 0 ;
+  bottom: 0;
+  width: 100%;
+  font-family: 'GothamB';
+  text-align: center;
+  color: transparent !important;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 1.5vw;
+  margin-bottom: -0.4vw;
+  letter-spacing: 0.1vw;
+  text-transform: uppercase;
+  -webkit-text-stroke: 0.02vw rgba(255, 255, 255, 0.2) !important;
+}
+
+.hotbar h1:nth-child(8)::after {
+  content: 'Hotbar';
+  font-family: 'Gotham';
+  position: absolute;
+  top: 0.5vw;
+  left: 12.5vw;
+  color: #FFFFFF;
+}
+
+.item {
+  display: grid;
+  place-items: center;
+  position: relative;
+  width: 5.5vw;
+  height: 5.5vw;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.item img {
+  width: 4.5vw;
+  height: 4.5vw;/* 
+  background: red; */
+}
+
+.item .index {
+  display: grid;
+  place-items: center;
+  position: absolute;
+  top: 0.4vw;
+  left: 0.4vw;
+  width: 1vw;
+  height: 1vw;
+  border-radius: 3px;
+  background: rgba(224, 55, 180, 0.2);
+}
+
+.item .index h1 {
+  font-family: 'Gotham';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.5vw;
+  text-align: center;
+  margin-bottom: 0.05vw;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+
+img[src="./public/images/borderLeft.svg"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 7.75vw;
+}
+
+img[src="./public/images/borderRight.svg"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 7.75vw;
+}
+
+
+
+
+@font-face {
+  font-family: 'Gotham';
+  src: url(./public/GothamMedium.ttf);
+}
+
+@font-face {
+  font-family: 'GothamL';
+  src: url(./public/GothamLight.ttf);
+}
+
+@font-face {
+  font-family: 'GothamB';
+  src: url(./public/GothamExtraBold.otf);
+}

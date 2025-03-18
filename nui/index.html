@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@isaque.bm</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script>
+  <script src="./app.js" defer></script>
+  <script src="./progressBar.js" defer></script>
+  <link rel="stylesheet" type="text/css" href="loading-bar.css"/>
+</head>
+<body>
+  <div id="root" v-show="hud">
+
+    <div class="logo-main-header-box">
+      <img src="brasil.png">
+    </div>
+    
+    
+    <div class="gunContainer" v-if="openWeapon">
+
+      <div class="gun">
+        <img :src= "`./public/icons/${gunInfos.gunName}.png`" alt="">
+      </div>
+
+      <div class="ammo">
+
+        <h1>{{gunInfos.ammo}} <span>| {{gunInfos.maxAmmo}}</span></h1>
+
+      </div>
+
+
+    </div>
+
+    <div class="clock">
+      <img class="bg-clock-image" src="./public/images/bg-clock.svg" alt="">
+      <img class="day-clock-icon" :src="`./public/icons/${weather}.svg`" alt="">
+      <h1>{{hour}}:{{minutes}}</h1>
+    </div>
+
+    <div class="local-text">
+      <span>{{textLocal}}</span>
+    </div>
+
+    <div class="hud-velocity" v-show="hud">
+      <div class="main-box" v-if="open">
+        <img class="box" src="./public/images/speedVelocity.svg">
+        <div :style="{'width': gasolinaFormatWidth() + 'px'}" class="box-gasol">
+          <div class="line-box gasolina">
+          </div>
+        </div>
+        <img src="./public/images/gasolineIcon.svg" alt="">
+
+        <div >
+          <img src="./public/images/turboIcon.svg" alt="">
+          <div :style="{'width': turbo * 1.2 + 'px'}" class="box-turbo">
+            <div class="line-box turbo">
+            </div>
+          </div>
+        </div>
+  
+        <div class="icons">
+          <div>
+            <img v-show="belt" src="./public/icons/icon1.svg">
+            <img v-show="!belt" src="./public/icons/icon1Active.svg">
+          </div>
+          <div>
+            <img v-if="!key" class="key" src="./public/icons/key.svg" alt="">
+            <img v-if="key" class="key" src="./public/icons/keyactive.svg" alt="">
+          </div>
+          <div class="motorContainer">
+            <div :style="{'height': `${motor * 0.2}px`}" class="motorProgress"></div>
+            <img src="./public/icons/icon3.svg">
+          </div>
+        </div>
+  
+        <div class="velocity">
+          <h2><span>{{formatSpeed()}}</span>{{getVelocity}}<span class='km-text' >KM/H</span></h2>
+        </div>
+  
+        <div class="level">
+          <p>{{level}}</p>  
+        </div>
+  
+      </div>
+  
+      <div class="main-footer" v-show="hud">
+        <div class="triangle-container">
+          <div class="tringle-main">
+            <img src="./public/images/polygons/Polygon1.svg">
+            <img class="icon-polygon" src="./public/images/polygons/iconPolygon1.svg">
+            <div :data-value="getHealth" data-path="M33.0912 0.912396C36.5553 0.918041 38.7143 4.67156 36.9774 7.66874L23.1934 31.4537C21.4564 34.4509 17.1263 34.4438 15.3992 31.441L1.69276 7.61125C-0.0343999 4.60843 2.13677 0.861964 5.60087 0.867608L33.0912 0.912396Z" class="ldBar health">
+
+            </div>
+          </div>
+          
+         <div class="tringle-main">
+            <img src="./public/images/polygons/Polygon2.svg">
+            <img class="icon-polygon" id="shieldIcon" src="./public/images/polygons/iconPolygon2.svg">
+            <div :data-value="getArmor" data-path="M33.0912 0.912396C36.5553 0.918041 38.7143 4.67156 36.9774 7.66874L23.1934 31.4537C21.4564 34.4509 17.1263 34.4438 15.3992 31.441L1.69276 7.61125C-0.0343999 4.60843 2.13677 0.861964 5.60087 0.867608L33.0912 0.912396Z" class="ldBar armor">
+
+            </div>
+          </div>
+    
+        <!-- <div class="tringle-main">
+            <img src="./public/images/polygons/Polygon3.svg">
+            <img  class="icon-polygon customP" src="./public/images/polygons/iconPolygon3.svg">
+            <div :data-value="getHunger" data-path="M33.0912 0.912396C36.5553 0.918041 38.7143 4.67156 36.9774 7.66874L23.1934 31.4537C21.4564 34.4509 17.1263 34.4438 15.3992 31.441L1.69276 7.61125C-0.0343999 4.60843 2.13677 0.861964 5.60087 0.867608L33.0912 0.912396Z" class="ldBar hunger">
+
+            </div>
+          </div>
+    
+          <div class="tringle-main">
+            <img src="./public/images/polygons/Polygon4.svg">
+            <img class="icon-polygon" id="thirst" src="./public/images/polygons/iconPolygon4.svg">
+            <div :data-value="getThirst" data-path="M33.0912 0.912396C36.5553 0.918041 38.7143 4.67156 36.9774 7.66874L23.1934 31.4537C21.4564 34.4509 17.1263 34.4438 15.3992 31.441L1.69276 7.61125C-0.0343999 4.60843 2.13677 0.861964 5.60087 0.867608L33.0912 0.912396Z" class="ldBar thirst">
+
+            </div>
+          </div>-->
+        </div>
+        <div class="retangle" style="background-image: url(./public/images/polygons/retangle.svg);">
+          <img :src="`./public/images/polygons/${falando}.svg`" alt="">
+  
+          <div class="box-radio">
+            <!-- <h2>{{ mic == 0 ? 'Sussurrando' : (mic == 1 ? 'Falando' : 'Gritando') }}</h2> -->
+            <h2>{{ mic == 0 ? 'Sussurrando' : (mic == 1 ? 'Normal' : (mic == 2 ? 'Gritando' : 'Berrando')) }}</h2>
+            <div class="frequence">
+              <p>{{frequence}}<span>MHZ</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="weapon-box">
+      <img src="./public/images/weapon-img.png" alt="weapon-image">
+      <div class="amunnation-box">
+        <span><strong>{{ammunitionInWeapon}}</strong> | {{ammunitionInStore}}</span>
+      </div>
+    </div> -->
+
+    <div v-show="hotbar.active" class="hotbarContainer">
+
+      <div class="hotbar">
+
+        <img src="./public/images/borderLeft.svg" alt="">
+        <img src="./public/images/borderRight.svg" alt="">
+  
+        <div v-for="(i, index) in 5" class="item">
+
+          <div class="index">
+
+            <h1>{{index + 1}}</h1>
+
+          </div>
+
+         <!--  <img v-if="hotbar.data[index]" :src="`./public/hotbar/${hotbar.data[index]}.png`" alt=""> -->
+          <img v-if="hotbar.data[index+1]" :src="`nui://hype_inventory/nui/images/${hotbar.data[index+1]}.png`" alt="">
+
+        </div>
+
+        <h1>Hotbar</h1>
+  
+      </div>
+
+    </div>
+    
+
+
+    
+  </div>
+
+  <script type="text/javascript" src="loading-bar.js"></script>
+</body>
+</html>
